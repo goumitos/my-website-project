@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Clay Sculptures</title>
+    <style>
+        :root {
+            /* Warm Red & White Aesthetic */
+            --bg-color: #fff5f5; 
+            --text-color: #4a0000; 
+            --accent-color: #ff1a1a; 
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace; 
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* The Scrolling Ticker Banner */
+        .vibe-banner {
+            background-color: var(--accent-color); 
+            color: #ffffff; 
+            padding: 15px 0;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(255, 26, 26, 0.4);
+        }
+
+        .marquee {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Smooth Fade-In Animation */
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 20px 20px;
+        }
+
+        h1.title {
+            font-size: 3.5rem;
+            margin-bottom: 5px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* The Architect Bio Box */
+        .bio-box {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid var(--accent-color);
+            text-align: left;
+            background-color: #ffffff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            box-shadow: 8px 8px 0px var(--accent-color); 
+            position: relative;
+            z-index: 10;
+        }
+
+        .bio-box strong {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+        }
+
+        /* The 3-Image Grid */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 5%;
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px; 
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: border 0.3s ease, transform 0.4s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 10; 
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 15px 35px rgba(255, 26, 26, 0.3);
+        }
+
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 245, 245, 0.95); 
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(255, 26, 26, 0.5);
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: var(--accent-color);
+            font-size: 50px;
+            cursor: pointer;
+            font-weight: 900;
+        }
+
+        /* Emoji Rain System */
+        .emoji {
+            position: fixed;
+            top: -50px;
+            z-index: 1; 
+            pointer-events: auto; 
+            cursor: crosshair; 
+            animation: fall linear forwards;
+            opacity: 0.9;
+            user-select: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+        /* The Interactive Leaflet Popup */
+        .emoji-leaflet {
+            position: fixed;
+            background: #ffffff;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            font-weight: 900;
+            font-size: 1rem;
+            text-transform: uppercase;
+            pointer-events: none; 
+            z-index: 2000;
+            box-shadow: 4px 4px 0px var(--accent-color);
+            animation: floatUp 0.8s ease-out forwards;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translate(-50%, -50%); }
+            100% { opacity: 0; transform: translate(-50%, -100px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="vibe-banner">
+        <div class="marquee">
+            I VIBECODED THIS LOL 🚀 &nbsp;&nbsp; // &nbsp;&nbsp; 🗣️😱 MAMAAAAAA 👩‍👦 OOOOOOHHHHH 😭🎶 &nbsp;&nbsp; // &nbsp;&nbsp; 🎸💥 WE WILL 🗣️ WE WILL 🪨 ROCK YOU!!! ⚡😱 &nbsp;&nbsp; // &nbsp;&nbsp; I VIBECODED THIS LOL 🚀 &nbsp;&nbsp; // &nbsp;&nbsp; 🔥🚀 DON'T STOP ME NOOOOOOW!!! 🏃‍♂️💨🛑 &nbsp;&nbsp; // &nbsp;&nbsp; 🎤🗣️ I WANT TO BREAK FREEEEEE 🕊️⛓️💥
+        </div>
+    </div>
+
+    <header class="fade-in">
+        <h1 class="title">Clay & Form</h1>
+        <p class="subtitle">RAW MATERIALS. PERMANENT STRUCTURES.</p>
+        
+        <div class="bio-box">
+            <strong>THE ARCHITECT</strong><br><br>
+            "I’m 16 years old and I build things from the ground up. I take raw dirt, water, and pressure, and turn it into permanent structures. 🤯 There are no undo buttons here—just hands, clay, and pure form. 😛 This isn't a standard high school art project; it's an exercise in focus and execution. 🗣️ Explore the gallery." 🤑
+        </div>
+    </header>
+
+    <div class="gallery-container fade-in" style="animation-delay: 0.3s;">
+        <img src="images/project_8.png" alt="Structure 8" class="gallery-item" onclick="openLightbox(this)">
+        <img src="images/pigeon_8.png" alt="Pigeon Structure 8" class="gallery-item" onclick="openLightbox(this)">
+        <img src="images/vault_8.png" alt="Vault 8" class="gallery-item" onclick="openLightbox(this)">
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span id="close-btn">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+    <script>
+        // Lightbox Logic
+        function openLightbox(element) {
+            const lightbox = document.getElementById("lightbox");
+            const lightboxImg = document.getElementById("lightbox-img");
+            lightbox.style.display = "flex";
+            lightboxImg.src = element.src;
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById("lightbox");
+            lightbox.style.display = "none";
+        }
+
+        // The Intense Interactive Emoji Rain System
+        function spawnEmoji() {
+            const emojis = ['🗿', '🏺', '🕊️', '🔥', '✨', '🧱', '🦍', '🦅', '🐀', '🐍', '🐅', '🦖']; 
+            const statuses = ['bozo', 'tuff', 'ew', 'aura'];
+            
+            const emojiEl = document.createElement('div');
+            emojiEl.classList.add('emoji');
+            
+            emojiEl.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emojiEl.style.left = Math.random() * 100 + 'vw';
+            
+            emojiEl.style.fontSize = (Math.random() * 30 + 20) + 'px';
+            
+            const duration = Math.random() * 3 + 2;
+            emojiEl.style.animationDuration = duration + 's';
+            
+            // The Click Interaction
+            emojiEl.addEventListener('mousedown', (e) => {
+                const leaflet = document.createElement('div');
+                leaflet.classList.add('emoji-leaflet');
+                leaflet.innerText = statuses[Math.floor(Math.random() * statuses.length)];
+                
+                leaflet.style.left = e.clientX + 'px';
+                leaflet.style.top = e.clientY + 'px';
+                
+                document.body.appendChild(leaflet);
+                
+                emojiEl.style.display = 'none';
+                
+                setTimeout(() => {
+                    leaflet.remove();
+                }, 800);
+            });
+
+            document.body.appendChild(emojiEl);
+
+            setTimeout(() => {
+                if(document.body.contains(emojiEl)) {
+                    emojiEl.remove();
+                }
+            }, duration * 1000);
+        }
+
+        setInterval(spawnEmoji, 100);
+    </script>
+
+</body>
+</html>
